@@ -78,6 +78,9 @@ class Tile:
             self.walls[2] = False
             neighbor.walls[0] = False
 
+    def highlight(self, screen):
+        pygame.draw.rect(screen, HIGHLIGHT_COLOR, pygame.Rect(self.i * self.width + 2, self.j * self.height + 2, self.width - 2, self.height - 2))
+
 def get_index(i, j):
     if i < 0 or j < 0 or i > COLUMNS - 1 or j > ROWS - 1:
         return -1
