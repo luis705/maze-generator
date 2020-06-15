@@ -62,6 +62,22 @@ class Tile:
         else:
             return None
 
+    def remove_walls(self, neighbor):
+        x = self.i - neighbor.i
+        if x == 1:
+            self.walls[1] = False
+            neighbor.walls[3] = False
+        elif x == -1:
+            self.walls[3] = False
+            neighbor.walls[1] = False
+        y = self.j - neighbor.j
+        if y == 1:
+            self.walls[0] = False
+            neighbor.walls[2] = False
+        elif y == -1:
+            self.walls[2] = False
+            neighbor.walls[0] = False
+
 def get_index(i, j):
     if i < 0 or j < 0 or i > COLUMNS - 1 or j > ROWS - 1:
         return -1

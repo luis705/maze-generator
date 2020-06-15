@@ -3,16 +3,13 @@ from pygame.locals import *
 
 import sys
 
-from tile import Tile
+from classes_and_functions import Tile, get_index
 from constants import *
 
 #  Initialize pygame
 pygame.init()
 
 def setup():
-    SCREEN.fill((0, 150, 0))
-    
-
     grid = []
 
     for j in range(ROWS):
@@ -23,13 +20,12 @@ def setup():
     return grid, grid[0]
     
 
-
-
 def main():
     grid, current = setup()
 
     while True:
         pygame.display.update()
+        SCREEN.fill(UNVISITED_COLOR)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -40,11 +36,12 @@ def main():
         
         current.visited = True
         next_visit = current.check_neighbors(grid)
-        
+
         if next_visit:
+            current.remove_walls(next_visit)
             next_visit.visited = True
             current = next_visit
-        
+
         pygame.time.delay(200)
 
 
