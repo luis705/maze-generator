@@ -16,16 +16,18 @@ def setup():
         for i in range(COLUMNS):
             tile = Tile(i, j, TILE_WIDTH, TILE_HEIGHT) 
             grid.append(tile)
-    
+        
     return grid, grid[0]
     
 
 def main():
     grid, current = setup()
+    current.visited = True
+    stack = []
 
     while True:
         pygame.display.update()
-        SCREEN.fill(UNVISITED_COLOR)
+        SCREEN.fill(VISITED_COLOR)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -34,15 +36,18 @@ def main():
         for tile in grid:
             tile.show(SCREEN)
         
-        current.visited = True
+        current.highlight(SCREEN)
+        
         next_visit = current.check_neighbors(grid)
 
         if next_visit:
+            stack.append(current)
             current.remove_walls(next_visit)
             next_visit.visited = True
             current = next_visit
-
-        pygame.time.delay(200)
+        elif len(stack) > 0:
+            current = stack.pop()
+        #pygame.time.delay(10)
 
 
 
