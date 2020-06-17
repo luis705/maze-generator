@@ -2,8 +2,10 @@ import pygame
 from pygame.locals import *
 
 import sys
+from random import randint
 
-from classes_and_functions import Tile, get_index
+from tile import Tile
+from utils import get_index
 from constants import *
 
 #  Initialize pygame
@@ -19,7 +21,6 @@ def setup():
         
     return grid, grid[0]
     
-
 def main():
     grid, current = setup()
     current.visited = True
@@ -36,9 +37,16 @@ def main():
         for tile in grid:
             tile.show(SCREEN)
         
-        current.highlight(SCREEN)
+        current.highlight(SCREEN, True)
         
-        next_visit = current.check_neighbors(grid)
+        neighbors = current.check_neighbors(grid)
+        neighbors = [neighbor for neighbor in neighbors if neighbor.visited == False and neighbor.i != -1]
+        
+        if len(neighbors) > 0:
+            neighbor_index = randint(0, len(neighbors) - 1)
+            next_visit = neighbors[neighbor_index]
+        else:
+            next_visit = False
 
         if next_visit:
             stack.append(current)
@@ -47,7 +55,16 @@ def main():
             current = next_visit
         elif len(stack) > 0:
             current = stack.pop()
-        #pygame.time.delay(10)
+        else:
+            SCREEN.fill(VISITED_COLOR)
+            for tile in grid:
+                tile.show(SCREEN)
+            
+            grid[0].highlight(SCREEN, True)
+            grid[-1].highlight(SCREEN, True)
+            
+            pygame.image.save(SCREEN, 'maze.png')
+            
 
 
 
