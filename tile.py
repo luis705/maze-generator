@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 
 from constants import *
+from utils import get_index
 
 from random import randint
 
@@ -9,10 +10,14 @@ class Tile:
     def __init__(self, i, j, width, height):
         self.i = i
         self.j = j
+        self.f = 0
+        self.g = 0
+        self.h = 0
         self.width = width
         self.height = height
         self.walls = [True, True, True, True]
         self.visited = False
+        self.previous = None
     
     def show(self, screen):
         x = self.i * self.width
@@ -38,29 +43,31 @@ class Tile:
         bottom_index = get_index(self.i, self.j + 1)
         left_index = get_index(self.i + 1, self.j)
 
-        if top_index != -1:
+        if top_index:
             top = grid[top_index]
             neighbors.append(top)
+        else:
+            neighbors.append(Tile(-1, -1, -1, -1))
 
-        if right_index != -1:
-            right = grid[right_index]
-            neighbors.append(right)
-
-        if  bottom_index != -1:
-            bottom = grid[bottom_index]
-            neighbors.append(bottom)
-
-        if  left_index!= -1:
+        if  left_index:
             left = grid[left_index]
             neighbors.append(left)
-
-        neighbors = [neighbor for neighbor in neighbors if neighbor.visited == False]
-
-        if len(neighbors) > 0:
-            index = randint(0, len(neighbors) - 1)
-            return neighbors[index]
         else:
-            return None
+            neighbors.append(Tile(-1, -1, -1, -1))
+
+        if right_index :
+            right = grid[right_index]
+            neighbors.append(right)
+        else:
+            neighbors.append(Tile(-1, -1, -1, -1))
+
+        if  bottom_index :
+            bottom = grid[bottom_index]
+            neighbors.append(bottom)
+        else:
+            neighbors.append(Tile(-1, -1, -1, -1))
+
+        return neighbors
 
     def remove_walls(self, neighbor):
         x = self.i - neighbor.i
@@ -78,10 +85,18 @@ class Tile:
             self.walls[2] = False
             neighbor.walls[0] = False
 
-    def highlight(self, screen):
-        pygame.draw.rect(screen, HIGHLIGHT_COLOR, pygame.Rect(self.i * self.width + 2, self.j * self.height + 2, self.width - 2, self.height - 2))
+    def highlight(self, screen, bool):
+        if bool:
+            pygame.draw.rect(screen, HIGHLIGHT_COLOR, pygame.Rect(self.i * self.width + 2, self.j * self.height + 2, self.width - 2, self.height - 2))
+        else:
+            pygame.draw.rect(screen, VISITED_COLOR, pygame.Rect(self.i * self.width + 2, self.j * self.height + 2, self.width - 2, self.height - 2))
 
-def get_index(i, j):
-    if i < 0 or j < 0 or i > COLUMNS - 1 or j > ROWS - 1:
-        return -1
-    return i + j * COLUMNS
+    def neighbor_side(self, neighbor):
+        if self.j - neighbor.j >= 1:
+            return 0
+        elif self.i - neighbor.i <= -1:
+            return 1
+        elif self.j - neighbor.j <= -1:
+            return 2
+        elif self.i - neighbor.i >= 1:
+            return 3
