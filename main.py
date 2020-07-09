@@ -32,6 +32,13 @@ class Generator:
         self.stack = []
         self.current = self.grid[0]
 
+        # A* setup
+        self.start = self.grid[0]
+        self.finish = self.grid[-1]
+        self.open_set = []
+        self.closed_set = []
+        self.path
+
         # States setup
         self.generated = False
         self.solved = False
@@ -54,9 +61,10 @@ class Generator:
                     else:
                         if event.key == 98:
                             pygame.image.save(self.win, 'maze.png')
-                            print('SAVED')
-                        if event.key == 114:
+                        elif event.key == 114:
                             self.__init__()
+                        elif event.key == 115:
+                            self.solve()
 
     def draw(self, highlight):
         """
@@ -80,6 +88,12 @@ class Generator:
             # Set clock and draw on the screen
             self.clock.tick(60)
             self.draw(True)
+
+            # Check if window was closed
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
 
             # Get neighbor cells list
             neighbors = self.current.check_neighbors(self.grid, self.columns, self.rows)
