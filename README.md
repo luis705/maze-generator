@@ -100,7 +100,7 @@ python main.py
  </p>
 
 <p align="center">
-  If you want to change maze or tile dimensions change the SCREEN_WIDTH, SCREEN_HEIGHT, TILE_WIDTH and TILE_HEIGHT in the <a               href=https://github.com/luis705/maze/blob/master/constants.py>constants.py</a> file.
+  If you want to change maze or tile dimensions change the self.width, self.height, self.tile_width and self.tile_height in the <a href=https://github.com/luis705/maze/blob/master/constants.py>constants.py</a> file.
 </p>
 
 ---

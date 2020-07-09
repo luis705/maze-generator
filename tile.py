@@ -8,6 +8,8 @@ class Tile:
         self.j = j
         self.width = width
         self.height = height
+        self.x = self.i * self.width
+        self.y = self.j * self.height
 
         #  Depth-first setup
         self.walls = [True, True, True, True]
@@ -23,25 +25,22 @@ class Tile:
         """
         Show tile on the screen
         """
-        # Get x and y coordinates
-        x = self.i * self.width
-        y = self.j * self.height
-
         # Set Color
         if self.visited:
-            pygame.draw.rect(win, self.visited_color, (x + 2, y + 2, self.width - 2, self.height - 2))
+            pygame.draw.rect(win, self.visited_color, (self.x + 2,
+                                                       self.x + 2, self.width - 2, self.height - 2))
 
         # Draw walls
         if self.walls[0]:
-            pygame.draw.line(win, self.line_color, (x, y), (x + self.width, y), 2)
+            pygame.draw.line(win, self.line_color, (self.x, self.y), (self.x + self.width, self.y), 2)
         if self.walls[1]:
-            pygame.draw.line(win, self.line_color, (x, y), (x, y + self.height), 2)
+            pygame.draw.line(win, self.line_color, (self.x, self.y), (self.x, self.y + self.height), 2)
         if self.walls[2]:
-            pygame.draw.line(win, self.line_color, (x, y + self.height),
-                             (x + self.width, y + self.height), 2)
+            pygame.draw.line(win, self.line_color, (self.x, self.y + self.height),
+                             (self.x + self.width, self.y + self.height), 2)
         if self.walls[3]:
-            pygame.draw.line(win, self.line_color, (x + self.width, y),
-                             (x + self.width, y + self.height), 2)
+            pygame.draw.line(win, self.line_color, (self.x + self.width, self.y),
+                             (self.x + self.width, self.y + self.height), 2)
 
     def highlight(self, win, bool):
         """

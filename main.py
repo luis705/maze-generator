@@ -1,7 +1,8 @@
 import pygame
 
-import sys
+import math
 from random import randint
+import sys
 
 from tile import Tile
 
@@ -17,10 +18,11 @@ class Generator:
         self.clock = pygame.time.Clock()
 
         # Tiles setup
-        self.tile_width = 60
-        self.tile_height = 60
+        self.tile_width = 5
+        self.tile_height = 5
         self.columns = self.width // self.tile_width
         self.rows = self.height // self.tile_height
+        print(self.rows, self.columns)
         self.grid = []
         for j in range(self.rows):
             for i in range(self.columns):
@@ -31,13 +33,6 @@ class Generator:
         # Depth-first setup
         self.stack = []
         self.current = self.grid[0]
-
-        # A* setup
-        self.start = self.grid[0]
-        self.finish = self.grid[-1]
-        self.open_set = []
-        self.closed_set = []
-        self.path
 
         # States setup
         self.generated = False
@@ -63,8 +58,6 @@ class Generator:
                             pygame.image.save(self.win, 'maze.png')
                         elif event.key == 114:
                             self.__init__()
-                        elif event.key == 115:
-                            self.solve()
 
     def draw(self, highlight):
         """
