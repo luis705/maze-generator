@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-	
+
   <a href="https://github.com/luis705">
     <img alt="Made by Luis Otávio" src="https://img.shields.io/badge/made%20by-Luís%20Otávio%20Amorim-brightgreen">
   </a>
@@ -63,6 +63,14 @@ sudo apt-get install python3
 pip install pygame
 ```
 
+<h2>Using</h2>
+
+<p>Run main.py on the terminal</p>
+
+```
+python main.py
+```
+
 ---
 
 # 📋 Features</h1>
@@ -79,8 +87,8 @@ pip install pygame
 	<li>Core
 		<p><a href="python.org">Python</a> - a easy to learn, but powerfull programming language
 </ul>
-	
---- 
+
+---
 
 # 🎮 Results</h1>
 <h3 align="center">
