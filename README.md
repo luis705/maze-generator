@@ -105,12 +105,6 @@ python main.py
 
 ---
 
-# 📌 Support</h1>
-Facebook at <a href="https://www.facebook.com/luisotavio.amorim.3">Luís Otávio Amorim</a><br>
-Linkedin at <a href="https://www.linkedin.com/in/lu%C3%ADs-ot%C3%A1vio-lopes-amorim-252494199/"> Luís Otávio Amorim</a><br>
-Twitter at <a href="https://twitter.com/amorimluis01">@amorimluis01</a>
-
----
 
 # 📝 License </h1>
 
