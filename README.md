@@ -26,8 +26,7 @@
 <ul>
 	<li><a href="#-getting-started">Getting Started</a></li>
 	<li><a href="#-features">Features</a></li>
-	<li><a href="#-results">Results</a></li>
-	<li><a href="#-support">Support</a></li>
+	<li><a href="#-controls">Results</a></li>
 </ul>
 
 ---
@@ -90,18 +89,16 @@ python main.py
 
 ---
 
-# 🎮 Results</h1>
-<h3 align="center">
-  The result maze will be saved in a png file as follows:
-</h3>
+# 🎮 Controls</h1>
+<ul>
+	<li>To change the maze dimensions just change the values of self.width, self.height, self.tile_width and self.tile_height in the generator constructor function on the main.py file.</li>
+	<li>The maze will be generated after pressing the return key and saved as a png after pressing the "b" key.</li>
+	<li>After the generation is done, press the "b" key to save it as a png</li>
+	<li>To reset the generated maze press the "r" key.</li>
 
 <p align="center">
   <img alt="Result" src="https://github.com/luis705/maze/blob/master/maze.png">
  </p>
-
-<p align="center">
-  If you want to change maze or tile dimensions change the self.width, self.height, self.tile_width and self.tile_height in the <a href=https://github.com/luis705/maze/blob/master/constants.py>constants.py</a> file.
-</p>
 
 ---
 
@@ -110,4 +107,4 @@ python main.py
 
 <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
 
-This project is licensed under the MIT license - se the <a href="https://github.com/luis705/twitter-bot/blob/master/LICENSE">LICENSE</a> file for details
+This project is licensed under the MIT license - see the <a href="https://github.com/luis705/twitter-bot/blob/master/LICENSE">LICENSE</a> file for details
